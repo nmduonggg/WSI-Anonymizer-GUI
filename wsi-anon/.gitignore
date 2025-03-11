@@ -1,0 +1,39 @@
+# C
+*.lo
+*.loT
+*.o
+*.so
+*.exe
+*.manifest
+*.rc
+*.out
+*.a
+
+.dirstamp
+
+Makefile.in
+.deps
+.libs
+
+.vscode/
+.vs/
+bin/
+obj/
+exe/
+
+# python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# unit test output
+Test-Wsi-Anon-Results.xml

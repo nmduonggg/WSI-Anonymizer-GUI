@@ -1,0 +1,8 @@
+version: "3.8"
+
+services:
+  wsi-anon:
+    build:
+      context: "."
+    volumes:
+      - ${COMPOSE_DATA_DIR}:/data
