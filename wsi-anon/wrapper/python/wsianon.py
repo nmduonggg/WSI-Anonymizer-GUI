@@ -30,7 +30,7 @@ def _load_library():
             )
     elif platform.system() == 'Windows':
         try:
-            return ctypes.WinDLL("libwsianon.dll")
+            return ctypes.WinDLL("./libwsianon.dll")
         except FileNotFoundError:
             raise ModuleNotFoundError(
                 "Could not locate libwsianon.dll. Please make sure that the DLL is created and placed under C:\\Windows\\Systems32."
@@ -55,7 +55,8 @@ def get_wsi_data(filename):
     wsi_data = WSIData.from_address(_wsi_anonymizer.get_wsi_data((ctypes.c_char_p(c_filename))))
     return wsi_data
 
-def anonymize_wsi(filename, new_label_name, keep_macro_image=False, disable_unlinking=False, do_inplace=False):
+def anonymize_wsi(filename, new_label_name, keep_macro_image=False,
+                  disable_unlinking=False, do_inplace=False):
     '''
     performs anonymization on slide
     '''
