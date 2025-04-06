@@ -97,7 +97,7 @@ def anonymize_wsi(filename, new_label_name, keep_macro_image=False,
     _wsi_anonymizer.anonymize_wsi.argtypes = [ctypes.c_char_p, ctypes.c_char_p, ctypes.c_bool, ctypes.c_bool, ctypes.c_bool]
     _wsi_anonymizer.anonymize_wsi.restype = ctypes.c_void_p
 
-    filename = str(filename).replace(" ", "\\ ") # escape whitespaces if exist
+    # filename = str(filename).replace(" ", "\\ ") # escape whitespaces if exist
     c_filename = filename.encode('utf-8')
     c_new_label_name = new_label_name.encode('utf-8')
 
@@ -170,6 +170,7 @@ class WSIGUI:
         self.file_extension_label.grid(row=3, column=0, padx=10, pady=10)
         self.file_extension_entry = tk.Entry(root, width=50)
         self.file_extension_entry.grid(row=3, column=1, padx=10, pady=10)
+        self.file_extension_entry.insert(0, "mrxs")
         
         # Log text box
         self.log_label = tk.Label(root, text="Log Output:")
@@ -225,9 +226,6 @@ class WSIGUI:
         new_anonymized_name = self.new_anonymized_name_entry.get()
         file_extension = self.file_extension_entry.get()
         do_inplace = self.anonymization_choice.get()
-        
-        # Ensure that file paths are properly handled by surrounding them with double quotes
-        # wsi_filepath = f'"{wsi_filepath}"'
 
         if not all([wsi_filepath, original_filename, new_anonymized_name, file_extension]):
             messagebox.showerror("Error", "All fields are required!")
@@ -244,6 +242,7 @@ class WSIGUI:
         
         # Log the start of the process
         self.log_message("Start running anonymization...")
+        # wsi_filepath = os.path.join(*wsi_filepath.split("\\\\"))   # convert to raw string
 
         result = anonymize_wsi_files(wsi_filepath, original_filename, new_anonymized_name,
                                      file_extension, do_inplace=do_inplace)

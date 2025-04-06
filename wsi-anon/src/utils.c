@@ -55,6 +55,7 @@ const char *get_filename_ext(const char *filename) {
 }
 
 int32_t file_exists(const char *filename) {
+    printf("Opening file: '%s'\n", filename);
     file_handle *file;
     if ((file = file_open(filename, "rb+"))) {
         file_close(file);
