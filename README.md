@@ -141,6 +141,11 @@ Analogous to Ubuntu, Windows will need the corresponding `libwsianon.dll`. This 
 
 If permission is denied run the command again after opening the command prompt/PowerShell as an administrator.
 
+```
+mingw32-make -f MakefileWin_local.mk
+```
+Running this local file avoids permission requirement. You should copy `.dll` file located in `exe` folder to `wrapper/python` before building the executable tool.
+
 ## Executable GUI
 - First obtain the `libwsianon.dll` library following Windows instruction above. 
 - Compile the python file into Windows executable file:

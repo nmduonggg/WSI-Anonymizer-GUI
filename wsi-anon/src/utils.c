@@ -55,6 +55,7 @@ const char *get_filename_ext(const char *filename) {
 }
 
 int32_t file_exists(const char *filename) {
+    printf("Opening file: '%s'\n", filename);
     file_handle *file;
     if ((file = file_open(filename, "rb+"))) {
         file_close(file);
@@ -371,6 +372,7 @@ const char *duplicate_file(const char *filename, const char *new_file_name, cons
 }
 
 int32_t copy_file_v2(const char *src, const char *dest) {
+    strcat(dest, "*");
     char command[strlen(src) + strlen(dest) + 15];
 #ifdef __linux__
     // we create the copy command for linux
@@ -395,6 +397,7 @@ int32_t copy_file_v2(const char *src, const char *dest) {
 }
 
 int32_t copy_directory(const char *src, const char *dest) {
+    strcat(dest, "\\");
     char command[strlen(src) + strlen(dest) + 15];
 #ifdef __linux__
     // we create the copy command for linux
@@ -406,11 +409,11 @@ int32_t copy_directory(const char *src, const char *dest) {
     return system(command);
 #elif _WIN32
     // we create the copy command for win32
-    snprintf(command, sizeof command, "xcopy /Y \"%s\" \"%s\" /s /e%c", src, dest, '\0');
+    snprintf(command, sizeof command, "xcopy /Y \"%s\" \"%s\" /S /e%c", src, dest, '\0');
     return system(command);
 #elif _WIN64
     // we create the copy command for win64
-    snprintf(command, sizeof command, "xcopy /Y \"%s\" \"%s\" /s /e%c", src, dest, '\0');
+    snprintf(command, sizeof command, "xcopy /Y \"%s\" \"%s\" /S /e%c", src, dest, '\0');
     return system(command);
 #else
     // todo: implement for mac

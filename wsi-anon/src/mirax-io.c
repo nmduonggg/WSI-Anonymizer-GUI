@@ -712,7 +712,6 @@ char *strndup(const char *s1, size_t n) {
 int32_t handle_mirax(const char **filename, const char *new_label_name, bool keep_macro_image, bool disable_unlinking,
                      bool do_inplace) {
     fprintf(stdout, "Anonymize Mirax WSI...\n");
-
     const char *path = strndup(*filename, strlen(*filename) - strlen(DOT_MRXS_EXT));
 
     if (!do_inplace) {
